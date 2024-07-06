@@ -1,18 +1,21 @@
 #include <raylib.h>
 #include <iostream>
-
+#include "simulations.hpp"
 
 int main()
 {
     Color GREY = {29, 29, 29, 255};
     const int WINDOW_WIDTH = 750;
     const int WINDOW_HEIGHT = 750;
+    const int CELL_SIZE = 25;
     int FPS = 12;
 
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Game of Life");
     SetTargetFPS(FPS);
+    Simulation simulation{WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE};
 
-     while(WindowShouldClose() == false) 
+    //Simulation Loop
+    while(WindowShouldClose() == false) 
     {
         // 1. Event Handling
         if(IsMouseButtonDown(MOUSE_BUTTON_LEFT))
