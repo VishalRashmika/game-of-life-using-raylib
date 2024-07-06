@@ -16,6 +16,23 @@ int main()
     //Simulation Loop
     while(WindowShouldClose() == false) 
     {
+        if(IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+        {
+            Vector2 mousePosition = GetMousePosition();
+            int row = mousePosition.y / CELL_SIZE;
+            int column = mousePosition.x / CELL_SIZE;
+            simulation.ToggleCell(row, column);
+        }
+        if(IsKeyPressed(KEY_ENTER))
+        {
+            simulation.Start();
+            SetWindowTitle("Game of Life is running ...");
+        }
+        else if(IsKeyPressed(KEY_SPACE))
+        {
+            simulation.Stop();
+            SetWindowTitle("Game of Life has stopped.");
+        }
 
         // 3. Drawing
         BeginDrawing();
