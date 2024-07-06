@@ -12,10 +12,9 @@ int main()
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Game of Life");
     SetTargetFPS(FPS);
 
-
-    //Simulation Loop
-    while(WindowShouldClose() == false) 
+     while(WindowShouldClose() == false) 
     {
+        // 1. Event Handling
         if(IsMouseButtonDown(MOUSE_BUTTON_LEFT))
         {
             Vector2 mousePosition = GetMousePosition();
@@ -33,11 +32,35 @@ int main()
             simulation.Stop();
             SetWindowTitle("Game of Life has stopped.");
         }
+        else if(IsKeyPressed(KEY_F))
+        {
+            FPS += 2;
+            SetTargetFPS(FPS);
+        }
+        else if(IsKeyPressed(KEY_S))
+        {
+            if(FPS > 5)
+            {
+                FPS -= 2;
+                SetTargetFPS(FPS);
+            }
+        }
+        else if(IsKeyPressed(KEY_R))
+        {
+            simulation.CreateRandomState();
+        }
+        else if(IsKeyPressed(KEY_C))
+        {
+            simulation.ClearGrid();
+        }
+
+        // 2. Updating State
+        simulation.Update(); 
 
         // 3. Drawing
         BeginDrawing();
         ClearBackground(GREY);
-
+        simulation.Draw();
         EndDrawing();
     }
 
